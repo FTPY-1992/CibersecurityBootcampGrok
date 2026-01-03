@@ -30,7 +30,6 @@ def evaluate_password_strength(password: str) -> dict:
         score += 10
     else:
         feedback.append("Add at least one uppercase letter (A-Z) to increase strength.")
-
     # Rule 3: Lowercase letters
     has_lower = False
     for char in password:
@@ -46,7 +45,27 @@ def evaluate_password_strength(password: str) -> dict:
         feedback.append("Avoid using only uppercase letters – mix cases for better resistance against attacks.")
     if not has_upper and has_lower:
         feedback.append("Avoid using only lowercase letters – mix cases for better resistance against attacks.")
+    #Rule 4 -Digits (0-9)
+    has_digit = False
+    for char in password:
+        if char.isdigit():
+            has_digit = True
+            break
+    if has_digit:
+        score += 15
+    else:
+        feedback.append("Include at least one digit (0-9) to strengthen the password.")
+    # Bonus educational feedback: digits grouped at start or end (common weak patterns)
+    if has_digit:
+        # Digits only at the end
+        stripped_end = password.rstrip('0123456789')
+        if len(password) > len(stripped_end) and not any(c.isdigit() for c in stripped_end):
+            feedback.append("Avoid placing all numbers at the end – distribute them throughout the password.")
 
+        # Digits only at the start
+        stripped_start = password.lstrip('0123456789')
+        if len(password) > len(stripped_start) and not any(c.isdigit() for c in stripped_start):
+            feedback.append("Avoid placing all numbers at the beginning – distribute them throughout the password.")
     # Determine level based on final score (we'll implement this later)
     if score < 30:
         level = "Weak"
