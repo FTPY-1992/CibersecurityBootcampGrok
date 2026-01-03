@@ -66,6 +66,19 @@ def evaluate_password_strength(password: str) -> dict:
         stripped_start = password.lstrip('0123456789')
         if len(password) > len(stripped_start) and not any(c.isdigit() for c in stripped_start):
             feedback.append("Avoid placing all numbers at the beginning – distribute them throughout the password.")
+    # Rule 5: Special characters (symbols)
+    has_symbol = False
+    # Raw string: safe, legible, includes backslash literally
+    symbols = r'!@#$%^&*()-_=+[]{}|;:\'",.<>?/`~' #OJO! sin esta forma, problemas asegurados por la barra invertida!
+    for char in password:
+        if char in symbols:
+            has_symbol = True
+            break
+
+    if has_symbol:
+        score += 25
+    else:
+        feedback.append("Include at least one special character (e.g. !@#$%^&*) for maximum strength.")
     # Determine level based on final score (we'll implement this later)
     if score < 30:
         level = "Weak"
