@@ -79,12 +79,12 @@ def evaluate_password_strength(password: str) -> dict:
         score += 25
     else:
         feedback.append("Include at least one special character (e.g. !@#$%^&*) for maximum strength.")
-    # Determine level based on final score (we'll implement this later)
+    # Calculate final strength level based on total score
     if score < 30:
         level = "Weak"
     elif score < 60:
         level = "Fair"
-    elif score < 90:
+    elif score < 85:
         level = "Strong"
     else:
         level = "Very Strong"
