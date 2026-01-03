@@ -158,6 +158,63 @@ Imaginá un servidor web típico.
 
 ## 4. Modelo de defensa en profundidad (Defense in Depth)
 
+### ¿Qué es?
+
+Es una estrategia de seguridad que parte de una premisa realista: ningún control o capa de protección es perfecta ni infalible.
+Por eso, en vez de confiar en una sola barrera “mágica” (como un firewall caro o un antivirus top), se implementan múltiples capas independientes que se complementan y superponen.Si un atacante atraviesa una capa, se encuentra inmediatamente con la siguiente.
+El objetivo no es impedir el 100% de los ataques (eso es imposible), sino aumentar tanto el costo y el esfuerzo del atacante que el ataque deje de ser rentable o sea detectado a tiempo.
+Metáfora clásica: un castillo medieval  
+* Foso → muralla → puertas reforzadas → patio con arqueros → torre del homenaje con bóveda → cofre con cerradura y guardia personal.
+Aunque alguien cruce el foso, todavía tiene 5 obstáculos más.
+
+### ¿Por qué una sola capa nunca alcanza?
+
+Razones reales del mundo:
+* Todo software tiene bugs y vulnerabilidades (incluso los “mejores” antivirus han tenido zero-days).
+* Los humanos cometen errores (click en phishing, password débil, USB perdido).
+* Los atacantes son creativos y pacientes (buscan el camino más débil).
+* Las amenazas evolucionan más rápido que cualquier producto único (nuevo malware, nuevas técnicas de ingeniería social).
+
+Ejemplo histórico: si Equifax en 2017 hubiera confiado solo en su firewall perimetral, la brecha de 147 millones de personas habría sido igual… pero con Defense in Depth (segmentación, monitoreo, cifrado de datos sensibles) el daño habría sido mucho menor.
+
+### Capas típicas de defensa
+
+(No hay un orden fijo, pero un esquema común es este):
+1. **Perímetro**:
+Firewall, WAF, protección DDoS, VPN para acceso remoto.
+2. **Red interna**:
+Segmentación (VLANs, microsegmentación), Zero Trust Network Access, NAC.
+3. **Endpoints**:
+Antivirus/EDR/XDR, hardening del SO, application control, patch management.
+4. **Aplicaciones**:
+Secure coding practices, input validation, WAF a nivel app, autenticación fuerte (MFA).
+5. **Datos**:
+Cifrado en reposo y en tránsito, clasificación de datos, DLP (prevención de fuga).
+6. **Factor humano**:
+Capacitación continua, simulaciones de phishing, políticas claras, cultura de seguridad.
+7. **Seguridad física**:
+Control de acceso al data center, cámaras, destrucción segura de discos.
+8. **Detección y respuesta**:
+SIEM, logging centralizado, threat hunting, equipo de incident response.
+
+### Ejemplo práctico
+
+Imaginá un ataque de ransomware a una empresa mediana:
+* El atacante envía un email de phishing a un empleado.
+* Capa 1 (humana): el empleado está capacitado y no hace click → ataque detenido.
+* Si falla y hace click → Capa 2 (email gateway): filtro anti-phishing lo bloquea.
+* Si pasa → Capa 3 (endpoint): EDR detecta el payload y lo pone en cuarentena.
+* Si evade → Capa 4 (red): segmentación impide que llegue a servidores críticos.
+* Si llega → Capa 5 (acceso): necesita credenciales con MFA que no tiene.
+* Si las roba → Capa 6 (datos): los archivos sensibles están cifrados.
+* Si cifra algo → Capa 7 (backups): backups offline e inmutables permiten recuperación rápida.
+* Todo el tiempo → Capa 8 (monitoreo): SIEM alerta al equipo que responde en minutos.
+
+**Resultado**: aunque varias capas fallen, el ataque no logra su objetivo final. 
+Conclusión clave
+`“La seguridad no es un producto, sino un proceso continuo”.` 
+Defense in Depth no elimina el riesgo, pero lo gestiona de forma realista y escalable.
+
 ## 5. Principios básicos de seguridad
 
 - Least privilege
