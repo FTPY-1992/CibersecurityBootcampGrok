@@ -7,8 +7,19 @@ def evaluate_password_strength(password: str) -> dict:
     """
     score = 0
     feedback = []
-
-    # We will add rules one by one here
+    length = len(password)
+    #Rule 1: LENGTH - most important factor
+    if length < 8:
+        feedback.append("Password is too short: use at least 8 characters.")
+    elif length < 12:
+        feedback.append("Good start, but consider using 12+ characters for better security.")
+        score += 20
+    elif length < 16:
+        feedback.append("Strong length! 16+ characters is excellent.")
+        score += 40
+    else:
+        feedback.append("Perfect length (16+ characters) – maximum points for this rule.")
+        score += 60
 
     # Determine level based on final score (we'll implement this later)
     if score < 30:
