@@ -15,10 +15,8 @@ def evaluate_password_strength(password: str) -> dict:
         feedback.append("Good start, but consider using 12+ characters for better security.")
         score += 20
     elif length < 16:
-        feedback.append("Strong length! 16+ characters is excellent.")
         score += 40
     else:
-        feedback.append("Perfect length (16+ characters) – maximum points for this rule.")
         score += 60
     # Rule 2: Uppercase letters
     has_upper = False
@@ -114,6 +112,9 @@ def main():
         print("\nSuggestions to improve it:")
         for msg in result['feedback']:
             print(f"  - {msg}")
+    else:
+        print("\nCongratulations! Your password is very strong and follows best practices.")
+        print("Remember: never reuse it and keep it secret.")
 
 
 if __name__ == "__main__":
