@@ -117,6 +117,45 @@ Peligrosidad: máxima.
 
 ## 3. Superficie de ataque y vectores comunes
 
+**Definición clara**
+La superficie de ataque (attack surface) es el conjunto total de puntos donde un atacante puede intentar entrar o extraer datos de un sistema.
+No es solo código o servidores: incluye hardware, software, red, personas, procesos y hasta proveedores externos.Cuanto más grande la superficie, más oportunidades tiene un atacante.
+El objetivo principal de cualquier hardening es reducir la superficie de ataque al mínimo necesario.
+
+**Tipos de superficie de ataque**
+* **Digital**: puertos abiertos, servicios expuestos, APIs, sitios web, aplicaciones móviles.
+* **Física**: dispositivos sin supervisión (laptops en oficinas, USBs perdidos, servidores en data centers con acceso físico débil).
+* **Humana**: empleados, contratistas, proveedores (el famoso “el eslabón más débil”).
+
+**Vectores de ataque comunes (los más explotados en la realidad)**
+1. **Phishing / Ingeniería social**
+El vector #1 mundial (más del 90% de brechas empiezan acá). Engaña al humano para que entregue credenciales o ejecute malware.
+2. **Credenciales débiles o robadas**
+Passwords simples, reutilizadas o filtradas en breaches anteriores (HaveIBeenPwned es oro para esto).
+3. **Software sin parchear / Vulnerabilidades conocidas**
+Ejemplo: Log4Shell (2021) afectó millones de sistemas porque muchos no aplicaron el patch rápido.
+4. **Configuraciones incorrectas**
+S3 buckets públicos en AWS, bases de datos expuestas en internet (Shodan es el buscador favorito de atacantes para esto), puertos innecesarios abiertos.
+5. **Ataques a la cadena de suministro**
+Como SolarWinds (2020): comprometen un proveedor confiable y llegan a miles de clientes.
+6. **Malware**
+Ransomware, troyanos, keyloggers entregados vía email, drive-by download o USB.
+7. **Inyecciones y ataques web**
+SQL injection, XSS, CSRF – clásicos que veremos en detalle en el módulo 07.
+
+**Cómo reducir la superficie de ataque (principios prácticos)**
+* **Principio de menor privilegio (least privilege)**: dar solo los permisos necesarios.
+* **Segmentación de red**: firewalls, VLANs, zero trust.
+* **Eliminar lo innecesario**: cerrar puertos, deshabilitar servicios no usados, remover software legacy.
+* **Patch management riguroso**.
+* **Monitoreo y inventory**: saber exactamente qué tenés expuesto (herramientas como Nessus o incluso nmap interno).
+* **Educación del usuario final**: porque el humano siempre forma parte de la superficie.
+
+**Ejemplo real y simple**:
+Imaginá un servidor web típico.
+**Superficie grande**: puerto 80/443 abierto, WordPress con plugins viejos, admin con password “admin123”, backup expuesto en /backup/.
+**Superficie reducida**: solo puerto 443 con TLS fuerte, aplicación mínima (sin CMS innecesario), autenticación MFA, backups en almacenamiento offline, monitoreo de logs.
+
 ## 4. Modelo de defensa en profundidad (Defense in Depth)
 
 ## 5. Principios básicos de seguridad
