@@ -81,7 +81,39 @@ Tu conexión a GitHub cae por mantenimiento no anunciado → no podés pushear t
 
 ### Tipos de amenazas
 
+* **Intencionales**: El atacante quiere hacer daño o ganar algo (robo de datos, extorsión, sabotaje).Ejemplo: ransomware, phishing dirigido.
+* **Accidentales**: Nadie quiso que pase, pero pasa (error humano, fallo de configuración).Ejemplo: un empleado borra una base de datos por error o deja una S3 bucket pública en AWS.
+* **Internas**: Origen dentro de la organización (empleado, ex-empleado, contratista).Estadística real: ~30-40% de las brechas vienen de adentro.
+* **Externas**: Vienen de fuera (hackers, competidores, estados).
+* **Activas**: Modifican o destruyen datos/sistemas (ransomware, defacement, MITM).  
+* **Pasivas**: Solo observan (sniffing, eavesdropping) sin tocar nada.
+
 ### Clasificación de atacantes (threat actors)
+
+* **Script Kiddies**:
+Usan herramientas ya hechas (Kali preinstalado, scripts de GitHub) sin entender cómo funcionan.
+Motivación: fama, diversión, "porque puedo".
+Peligrosidad: baja-media (pero pueden causar daño por suerte).
+
+* **Hacktivistas**:
+Atacan por ideología política, social o ambiental (Anonymous, grupos pro/anti algo).
+Ejemplo: defacement de sitios gubernamentales, leaks de datos.
+
+* **Cibercriminales organizados**:
+Grupos profesionales (muchos en Europa del Este, Nigeria, etc.).
+Motivación: dinero puro. Ransomware as a service, carding, BEC (Business Email Compromise).
+Peligrosidad: alta.
+
+* **Insider threats**:
+Empleados o ex-empleados con acceso legítimo.
+Puede ser intencional (venganza, venta de datos) o accidental (phishing exitoso interno).
+Muy difíciles de detectar porque ya están "adentro".
+
+* **APT / Nation-State**:
+Ataques persistentes avanzados patrocinados por estados (China, Rusia, Corea del Norte, USA, Israel, etc.).
+Ejemplos: Stuxnet, SolarWinds, APT29 (Cozy Bear).
+Recursos ilimitados, paciencia de años, objetivo: espionaje o sabotaje estratégico.
+Peligrosidad: máxima.
 
 ## 3. Superficie de ataque y vectores comunes
 
