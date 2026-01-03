@@ -217,6 +217,39 @@ Defense in Depth no elimina el riesgo, pero lo gestiona de forma realista y esca
 
 ## 5. Principios básicos de seguridad
 
-- Least privilege
-- Fail securely
-- Etc.
+Estos principios son guías fundamentales que se aplican en todo diseño, implementación y operación de sistemas seguros.
+
+### 1. Least Privilege (Principio de menor privilegio)
+
+Cada usuario, proceso o sistema debe tener solo los permisos estrictamente necesarios para cumplir su función, y nada más.
+Ejemplo: un empleado de RRHH no necesita acceso a los servidores financieros.
+
+### 2. Fail Securely (Fallar de forma segura)
+
+Cuando algo falla (un componente, validación, autenticación), el sistema debe negar el acceso o la operación por defecto, no permitirla.
+Ejemplo: si el servidor de autenticación cae, no dejar pasar a todos “por las dudas”.
+
+### 3. Defense in Depth (ya visto, pero como principio)
+
+Ya lo vimos: múltiples capas. Lo repetimos como principio porque es central.
+
+### 4. Economy of Mechanism (Economía de mecanismos)
+
+Mantener el diseño lo más simple posible. Cuanto más complejo el sistema de seguridad, más probabilidades de bugs y errores de configuración.
+“Simple is secure”.
+
+### 5. Open Design (Diseño abierto)
+
+La seguridad no debe depender del secreto del diseño o algoritmo, sino de la fortaleza de las claves.
+Famosa frase de Kerckhoffs: “El enemigo conoce el sistema”.
+Por eso AES es público y sigue siendo seguro.
+
+### 6. Separation of Duties (Separación de responsabilidades)
+
+Ninguna persona o proceso debe tener control total sobre una operación crítica.
+Ejemplo: una persona aprueba un pago, otra lo ejecuta → evita fraude interno.
+
+### 7. Psychological Acceptability (Aceptabilidad psicológica)
+
+Los controles de seguridad deben ser fáciles de usar y no interferir demasiado con el trabajo diario, o la gente los va a evadir.
+Ejemplo: MFA con app móvil es aceptable; pedir una contraseña de 30 caracteres cada 5 minutos no lo es.
