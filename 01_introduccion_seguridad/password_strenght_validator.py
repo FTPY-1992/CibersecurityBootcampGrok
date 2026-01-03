@@ -20,6 +20,32 @@ def evaluate_password_strength(password: str) -> dict:
     else:
         feedback.append("Perfect length (16+ characters) – maximum points for this rule.")
         score += 60
+    # Rule 2: Uppercase letters
+    has_upper = False
+    for char in password:
+        if char.isupper():
+            has_upper = True
+            break
+    if has_upper:
+        score += 10
+    else:
+        feedback.append("Add at least one uppercase letter (A-Z) to increase strength.")
+
+    # Rule 3: Lowercase letters
+    has_lower = False
+    for char in password:
+        if char.islower():
+            has_lower = True
+            break
+    if has_lower:
+        score += 10
+    else:
+        feedback.append("Add at least one lowercase letter (a-z) to increase strength.")
+
+    if has_upper and not has_lower:
+        feedback.append("Avoid using only uppercase letters – mix cases for better resistance against attacks.")
+    if not has_upper and has_lower:
+        feedback.append("Avoid using only lowercase letters – mix cases for better resistance against attacks.")
 
     # Determine level based on final score (we'll implement this later)
     if score < 30:
