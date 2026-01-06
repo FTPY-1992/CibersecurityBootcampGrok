@@ -34,22 +34,33 @@ def hash_password(password: str, salt: str = None, iterations: int = 600000) -> 
     }
 
 
-def verify_password(password: str, salt: str, hashed: str) -> bool:
+def verify_password(password: str, stored:dict) -> bool:
     """Verify if password matches the stored hash."""
-    # TO DO: re-hash and compare
-    return False
-
+    new_hash = hash_password(
+        password = password,
+        salt = stored["salt"],
+        iterations=stored["iterations"]
+    )
+    return new_hash["hashed"] == stored["hashed"]
 
 def main():
+    print("=== Secure Password Hasher - Module 02 ===\n")
     password = input("Enter password to hash: ").strip()
 
-    result = hash_password(password)
-    print(f"\nSalt: {result['salt']}")
-    print(f"Hashed: {result['hashed']}")
+    if not password:
+        print("Error: Empty password")
+        return
 
+    print("\nHashing with 600000 iterations... (this should take ~0.3-0.5 seconds)")
+    result = hash_password(password)
+    print(f"\nSalt (hex): {result['salt']}")
+    print(f"Hashed password: {result['hashed']}")
+    print(f"Iterations: {result['iterations']}")
+
+    print("\n" + "-" * 60)
     # Verification test
     check = input("\nEnter the same password to verify: ").strip()
-    if verify_password(check, result['salt'], result['hashed']):
+    if verify_password(check, result):
         print("Verification: SUCCESS – password matches")
     else:
         print("Verification: FAILED – password does not match")
