@@ -3,24 +3,34 @@ import os
 import binascii
 
 
-def generate_salt() -> str:
+def generate_salt(length: int = 16) -> str:
     """Generate a random salt as hex string."""
-    return binascii.hexlify(os.urandom(16)).decode('utf-8')
+    return binascii.hexlify(os.urandom(length)).decode('utf-8')
 
 
-def hash_password(password: str, salt: str = None) -> dict:
+def hash_password(password: str, salt: str = None, iterations: int = 600000) -> dict:
     """
-    Hash a password with SHA-256 and a random salt (if not provided).
-    Returns a dictionary with salt and hashed password.
+    Securely hash a password using PBKDF2-HMAC-SHA256.
+    Returns dict with salt, hashed password (hex) and iterations.
     """
     if salt is None:
         salt = generate_salt()
-
-    # TO DO: implement hashing
-
+    #Convert password to bytes
+    password_bytes = password.encode('utf-8')
+    salt_bytes = salt.encode('utf-8')
+    #PBKDF2 with HMAC-SHA256 - 32 bytes output (256 bits)
+    derived_key = hashlib.pbkdf2_hmac(
+        "sha256",
+        password_bytes,
+        salt_bytes,
+        iterations,
+        dklen=32)
+    #Convert to hex for storage
+    hashed_hex = binascii.hexlify(derived_key).decode('utf-8')
     return {
         "salt": salt,
-        "hashed": "TO DO"
+        "hashed": hashed_hex,
+        "iterations": iterations
     }
 
 
