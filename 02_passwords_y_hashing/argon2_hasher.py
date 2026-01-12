@@ -20,7 +20,7 @@ def hash_with_argon2(password: str) -> dict:
 
     return {
         "algorithm": "argon2id",
-        "params": ph.parameters,  # para debug
+        "params": ph._parameters,  # para debug
         "hashed": hashed
     }
 
