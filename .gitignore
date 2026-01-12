@@ -1,0 +1,15 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+.env/
+
+# Archivos de Python generados
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyCharm / IDE
+.idea/
+*.iml
