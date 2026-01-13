@@ -1,3 +1,6 @@
+from wsgiref.util import shift_path_info
+
+
 def caesar_encrypt(plaintext:str, shift:int) -> str:
     """
     Encrypt plaintext using Caesar cipher with given shift.
@@ -29,3 +32,15 @@ def caesar_decrypt(ciphertext:str, shift:int) -> str:
     :return: str
     """
     return caesar_encrypt(ciphertext, -shift)
+
+def brute_force_caesar(ciphertext: str) -> list:
+    """
+    Try all 25 possible shifts and return possible plaintext.
+    :param ciphertext: str
+    :return: list
+    """
+    results = []
+    for shift in range(1,26):
+        plaintext = caesar_decrypt(ciphertext, shift)
+        results.append(f"Shift {shift:2d}: {plaintext}")
+    return results
