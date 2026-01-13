@@ -20,3 +20,12 @@ def caesar_encrypt(plaintext:str, shift:int) -> str:
         else:
             result.append(char) # No shift non-letters
     return ''.join(result)
+
+def caesar_decrypt(ciphertext:str, shift:int) -> str:
+    """
+    Decrypt by shifting backwards.
+    :param ciphertext: str
+    :param shift: int
+    :return: str
+    """
+    return caesar_encrypt(ciphertext, -shift)
