@@ -43,6 +43,29 @@ def brute_force_caesar(ciphertext: str) -> list:
         results.append(f"Shift {shift:2d}: {plaintext}")
     return results
 
+def letters_frequency(text: str)-> dict:
+    """
+    Calculate frequency of letters in text (case-insensitive).
+    Return a dict with letter: count percentage
+    :param text: str
+    :return: dict
+    """
+    freq={}
+    total_letters=0
+
+    for char in text.upper():
+        if char.isalpha():
+            freq[char] = freq.get(char, 0) + 1
+            total_letters += 1
+
+    if total_letters == 0:
+        return {}
+
+    for letter in freq:
+        freq[letter] = (freq[letter] / total_letters) * 100
+
+    return dict(sorted(freq.items(), key=lambda item: item[1], reverse=True))
+
 def main_caesar():
     print("=== Caesar Cipher . Module 03 ===\n")
 
