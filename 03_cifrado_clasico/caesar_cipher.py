@@ -1,5 +1,3 @@
-from wsgiref.util import shift_path_info
-
 
 def caesar_encrypt(plaintext:str, shift:int) -> str:
     """
@@ -44,3 +42,28 @@ def brute_force_caesar(ciphertext: str) -> list:
         plaintext = caesar_decrypt(ciphertext, shift)
         results.append(f"Shift {shift:2d}: {plaintext}")
     return results
+
+def main_caesar():
+    print("=== Caesar Cipher . Module 03 ===\n")
+
+    action = input("Encrypt (e), Decrypt (d), or Brute Force (b)?")
+    text = input("Enter text: ").strip()
+
+    if action == "e":
+        shift = int(input("Enter shift (1-25): "))
+        encrypted = caesar_encrypt(text, shift)
+        print(f"\nEncrypted: {encrypted}")
+    elif action == "d":
+        shift = int(input("Enter shift (1-25): "))
+        decrypted = caesar_decrypt(text, shift)
+        print(f"\nDecrypted: {decrypted}")
+    elif action == "b":
+        print("\nBrute Force Results:")
+        results= brute_force_caesar(text)
+        for res in results:
+            print(res)
+    else:
+        print("Invalid Option")
+
+if __name__ == "__main__":
+    main_caesar()
