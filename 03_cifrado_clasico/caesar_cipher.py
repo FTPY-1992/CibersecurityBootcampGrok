@@ -66,6 +66,28 @@ def letters_frequency(text: str)-> dict:
 
     return dict(sorted(freq.items(), key=lambda item: item[1], reverse=True))
 
+def auto_decrypt_caesar(ciphertext: str)-> tuple[str,int]:
+    """
+    Attempt to auto-decrypt Caesar cipher by asumming most common letter is "E".
+    Returns the most likely plaintext and shift
+    :param ciphertext: str
+    :return: tuple[str,int]
+    """
+    freq = letters_frequency(ciphertext)
+    if not freq:
+        return "Letters no found", 0
+    # Most common letter in ciphertext
+    most_common = next(iter(freq))
+
+    #Most common in Spanish/English: 'E' (ACSII 69)
+    e_ord = ord('E')
+    most_common_ord= ord(most_common)
+
+    #Calculate shift to make most_common become 'E'
+    shift = (most_common_ord - e_ord) % 26
+    plaintext = caesar_decrypt(ciphertext, shift)
+    return plaintext, shift
+
 def main_caesar():
     print("=== Caesar Cipher . Module 03 ===\n")
 
