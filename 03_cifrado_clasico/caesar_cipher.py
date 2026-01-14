@@ -107,6 +107,12 @@ def main_caesar():
         results= brute_force_caesar(text)
         for res in results:
             print(res)
+
+        print("\n" + "-" * 60)
+        print("Auto-decrypt attempt (assuming most common letter is 'E'):")
+        likely_plaintext, likely_shift = auto_decrypt_caesar(text)
+        print(f"Most likely shift: {likely_shift}")
+        print(f"Decrypted: {likely_plaintext}")
     else:
         print("Invalid Option")
 
