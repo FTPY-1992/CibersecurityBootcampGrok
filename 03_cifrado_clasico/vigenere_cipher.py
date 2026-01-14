@@ -52,3 +52,26 @@ def vigenere_decrypt(ciphertext: str, key: str) -> str:
         else:
             result.append(char)
     return ''.join(result)
+
+def main_vigenere():
+    print("=== Vigenere Cipher - Module 03 ===\n")
+
+    action = input("Encrypt (e) or Decrypt (d)?").lower()
+    text = input("Enter text: ").strip()
+    key = input("Enter key: ").strip()
+
+    if not key:
+        print("Error: key not provided")
+        return
+
+    if action == "e":
+        encrypted = vigenere_encrypt(text, key)
+        print(f"\nEncrypted: {encrypted}")
+    elif action == "d":
+        decrypted = vigenere_decrypt(text, key)
+        print(f"\nDecrypted: {decrypted}")
+    else:
+        print("Error: invalid option")
+
+if __name__ == "__main__":
+    main_vigenere()
