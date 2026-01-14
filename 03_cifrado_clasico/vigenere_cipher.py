@@ -54,24 +54,43 @@ def vigenere_decrypt(ciphertext: str, key: str) -> str:
     return ''.join(result)
 
 def main_vigenere():
-    print("=== Vigenere Cipher - Module 03 ===\n")
+    print("=== Vigenère Cipher - Module 03 ===\n")
 
-    action = input("Encrypt (e) or Decrypt (d)?").lower()
-    text = input("Enter text: ").strip()
-    key = input("Enter key: ").strip()
+    while True:
+        action = input("Encrypt (e), Decrypt (d), or Quit (q)? ").lower().strip()
 
-    if not key:
-        print("Error: key not provided")
-        return
+        if action == 'q':
+            print("Exiting the program. See you next time!")
+            break
 
-    if action == "e":
-        encrypted = vigenere_encrypt(text, key)
-        print(f"\nEncrypted: {encrypted}")
-    elif action == "d":
-        decrypted = vigenere_decrypt(text, key)
-        print(f"\nDecrypted: {decrypted}")
-    else:
-        print("Error: invalid option")
+        if action not in ('e', 'd'):
+            print("Invalid option. Please use 'e', 'd' or 'q'.")
+            continue
+
+        # Request text and validate
+        text = ""
+        while not text:
+            text = input("Enter text: ").strip()
+            if not text:
+                print("Text cannot be empty. Please try again.")
+
+        # Request key and validate
+        key = ""
+        while not key:
+            key = input("Enter key: ").strip()
+            if not key:
+                print("Key cannot be empty. Please try again.")
+
+        # Process based on action
+        if action == 'e':
+            encrypted = vigenere_encrypt(text, key)
+            print(f"\nEncrypted: {encrypted}")
+
+        elif action == 'd':
+            decrypted = vigenere_decrypt(text, key)
+            print(f"\nDecrypted: {decrypted}")
+
+        print("\n" + "-" * 60 + "\n")
 
 if __name__ == "__main__":
     main_vigenere()
