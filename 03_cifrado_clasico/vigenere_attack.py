@@ -1,8 +1,11 @@
+from collections import Counter
+
+
 def extract_sequences(text:str, length: int) -> list:
     """
     Extract all alphabetic sequences of given length from text.
     :param text:
-    :param lenght:
+    :param length:
     :return: List of (sequence, starting positions)
     """
 
@@ -48,3 +51,36 @@ def find_repeated_sequences(text: str, min_length: int = 3) -> dict:
                 sequences[seq] = distances
 
     return sequences
+
+def estimate_key_length(text: str) -> int:
+    """
+    Estimate key length using Kasiski distances (most common factor)
+    :param text:
+    :return:
+    """
+    sequences = find_repeated_sequences(text)
+
+    if not sequences:
+        return 1 #Fallback
+
+    all_distances = []
+
+    for distances in sequences.values():
+        all_distances.extend(distances)
+
+    if not all_distances:
+        return 1
+
+    #Contamos factores comunes (simplificado)
+    factor_count = Counter()
+    for d in all_distances:
+        for factor in range(2, d+1):
+            if d % factor == 0:
+                factor_count[factor] += 1
+
+    if not factor_count:
+        return 1
+
+    #la longitud mas probable es el factor con mas apariciones
+    likely_length = factor_count.most_common(1)[0][0]
+    return likely_length
