@@ -84,3 +84,33 @@ def estimate_key_length(text: str) -> int:
     #la longitud mas probable es el factor con mas apariciones
     likely_length = factor_count.most_common(1)[0][0]
     return likely_length
+
+def frequency_analysis_substrings(text: str, key_length: int) -> list:
+    """
+    Split text into key_length substrings and analyze frequency for each.
+    Returns list of most likely shift for each position.
+    :param text:
+    :param key_length:
+    :return:
+    """
+
+    text = text.upper()
+    shifts = []
+
+    for pos in range(key_length):
+        substring = text[pos::key_length] #cada subalfabeto
+        if not substring:
+            shifts.append(0)
+            continue
+
+        freq = Counter(c for c in substring if c.isalpha())
+        if not freq:
+            shifts.append(0)
+            continue
+
+        most_common = freq.most_common(1)[0][0]
+        #Asumimos que la mas comun es 'E' (ASCII 69)
+        shift = (ord(most_common) - ord('E')) % 26
+        shifts.append(shift)
+
+    return shifts
