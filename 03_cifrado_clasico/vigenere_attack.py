@@ -134,3 +134,22 @@ def crack_vigenere(ciphertext: str) -> tuple[str,str]:
     decrypted_text = vigenere_decrypt(ciphertext, key)
 
     return key, decrypted_text
+
+
+def main_attack():
+    print("=== Vigenère Cracker - Module 03 ===\n")
+
+    ciphertext = input("Enter ciphertext to crack: ").strip().upper()
+
+    if not ciphertext:
+        print("Error: Empty ciphertext.")
+        return
+
+    key, decrypted = crack_vigenere(ciphertext)
+
+    print(f"\nEstimated key: {key}")
+    print(f"Decrypted text: {decrypted}")
+
+
+if __name__ == "__main__":
+    main_attack()
