@@ -1,4 +1,5 @@
 from collections import Counter
+from vigenere_cipher import vigenere_decrypt
 
 
 def extract_sequences(text:str, length: int) -> list:
@@ -114,3 +115,22 @@ def frequency_analysis_substrings(text: str, key_length: int) -> list:
         shifts.append(shift)
 
     return shifts
+
+def crack_vigenere(ciphertext: str) -> tuple[str,str]:
+    """
+    Attempt to crack Vigenere ciphertext using Kasiski and frequency analysis.
+    Returns (estimated key, decrypted text)
+    :param ciphertext:
+    :return:
+    """
+
+    key_length = estimate_key_length(ciphertext)
+    print(f"Estimated key length: {key_length}")
+
+    shifts = frequency_analysis_substrings(ciphertext, key_length)
+
+    #Convert shifts to letters (A=0 -> 'A', etc)
+    key = ''.join(chr(ord('A') + s) for s in shifts)
+    decrypted_text = vigenere_decrypt(ciphertext, key)
+
+    return key, decrypted_text
